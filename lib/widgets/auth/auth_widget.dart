@@ -73,8 +73,8 @@ class _FormWidgetState extends StatefulWidget {
 }
 
 class __FormWidgetStateState extends State<_FormWidgetState> {
-  final _loginTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+  final _loginTextController = TextEditingController(text: 'admin');
+  final _passwordTextController = TextEditingController(text: 'admin');
   String? errorText = null;
 
   void _auth() {
