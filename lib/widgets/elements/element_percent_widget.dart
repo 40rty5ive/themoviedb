@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -12,8 +14,8 @@ class elementPercentWidget extends StatefulWidget {
 class _elementPercentWidgetState extends State<elementPercentWidget> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
+    return const Center(
+      child: SizedBox(
         width: 100,
         height: 100,
         child: RadialPersentWidget(
@@ -134,7 +136,7 @@ class MyPainter extends CustomPainter {
   }
 
   Rect calculateArcsRect(Size size) {
-    final lineMargin = 3;
+    const lineMargin = 3;
     final offset = lineWidth / 2 + lineMargin;
     final arcRect = Offset(offset, offset) &
         Size(

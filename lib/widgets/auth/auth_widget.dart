@@ -1,8 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:themoviedb/Theme/app_button_style.dart';
-import 'package:themoviedb/widgets/main_screen/main_screen_widget.dart';
+import 'package:themoviedb/widgets/auth/auth_model.dart';
 
 class AuthWdget extends StatefulWidget {
   const AuthWdget({Key? key}) : super(key: key);
@@ -19,7 +17,7 @@ class _AuthWdgetState extends State<AuthWdget> {
         title: const Center(child: Text('Залогінитися')),
       ),
       body: ListView(
-        children: [_FormWidgetState(), _HeaderWidget()],
+        children: const [_FormWidget(), _HeaderWidget()],
       ),
     );
   }
@@ -39,25 +37,25 @@ class _HeaderWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 25),
-          Text(
+          const SizedBox(height: 25),
+          const Text(
               'In order to use the editing and rating capabilities of TMDB, as well as get personal recommendations you will need to login to your account. If you do not have an account, registering for an account is free and simple.',
               style: textStyle),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           TextButton(
             onPressed: () {},
             style: AppButtonStyle.linkButton,
-            child: Text('Register'),
+            child: const Text('Register'),
           ),
-          SizedBox(height: 25),
-          Text(
+          const SizedBox(height: 25),
+          const Text(
               'Якщо ви зареєструвалися, але не отримали електронний лист із підтвердженням.',
               style: textStyle),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           TextButton(
             onPressed: () {},
             style: AppButtonStyle.linkButton,
-            child: Text('Verify email'),
+            child: const Text('Verify email'),
           )
         ],
       ),
@@ -65,37 +63,12 @@ class _HeaderWidget extends StatelessWidget {
   }
 }
 
-class _FormWidgetState extends StatefulWidget {
-  const _FormWidgetState({Key? key}) : super(key: key);
-
-  @override
-  __FormWidgetStateState createState() => __FormWidgetStateState();
-}
-
-class __FormWidgetStateState extends State<_FormWidgetState> {
-  final _loginTextController = TextEditingController(text: 'admin');
-  final _passwordTextController = TextEditingController(text: 'admin');
-  String? errorText = null;
-
-  void _auth() {
-    var login = _loginTextController.text;
-    var password = _passwordTextController.text;
-
-    if (login == 'admin' && password == 'admin') {
-      errorText = null;
-      Navigator.of(context).pushReplacementNamed('/main_screen');
-    } else {
-      errorText = 'Не правильний логін, або пароль';
-    }
-    setState(() {});
-  }
-
-  void _resetPassword() {
-    print('reset password');
-  }
+class _FormWidget extends StatelessWidget {
+  const _FormWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final model = AuthProvider.read(context)?.model;
     const textStyle = TextStyle(
       fontSize: 16,
       color: Color(0xFF212529),
@@ -104,60 +77,103 @@ class __FormWidgetStateState extends State<_FormWidgetState> {
         border: OutlineInputBorder(),
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         isCollapsed: true);
-    const color = Color(0xFF01B4E4);
-    String? errorText = this.errorText;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (errorText != null) ...[
-            SizedBox(height: 20),
-            Text(
-              errorText,
-              style: TextStyle(fontSize: 17, color: Colors.red),
-            ),
-          ],
-          SizedBox(height: 25),
-          Text(
+          const _ErrorMessageWidget(),
+          SizedBox(
+            height: 20,
+          ),
+          const Text(
             'Username',
             style: textStyle,
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           TextField(
-            controller: _loginTextController,
+            controller: model?.loginTextController,
             decoration: textFieldDecorator,
           ),
-          SizedBox(height: 25),
-          Text(
+          const SizedBox(height: 25),
+          const Text(
             'Password',
             style: textStyle,
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           TextField(
-            controller: _passwordTextController,
+            controller: model?.passwordTextController,
             decoration: textFieldDecorator,
             obscureText: true,
           ),
-          SizedBox(height: 25),
-          Row(children: [
-            ElevatedButton(
-                onPressed: _auth,
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(color),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    textStyle: MaterialStateProperty.all(
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                    padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 8))),
-                child: Text('Login')),
-            SizedBox(width: 30),
-            TextButton(
-                onPressed: _resetPassword,
+          const SizedBox(height: 25),
+          Row(
+            children: [
+              const _AuthButtonWidget(),
+              const SizedBox(width: 30),
+              TextButton(
+                onPressed: () {},
                 style: AppButtonStyle.linkButton,
-                child: Text('Reset password'))
-          ])
+                child: const Text('Reset password'),
+              )
+            ],
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class _AuthButtonWidget extends StatelessWidget {
+  const _AuthButtonWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = AuthProvider.of(context)?.model;
+    const color = Color(0xFF01B4E4);
+    final onPressed =
+        model?.canStartAuth == true ? () => model?.auth(context) : null;
+
+    final child = model?.isAuthProgress == true
+        ? const SizedBox(
+            width: 15,
+            height: 15,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+            ),
+          )
+        : const Text('Login');
+
+    return ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(color),
+            foregroundColor: MaterialStateProperty.all(Colors.white),
+            textStyle: MaterialStateProperty.all(
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.symmetric(horizontal: 15, vertical: 8))),
+        child: child);
+  }
+}
+
+class _ErrorMessageWidget extends StatelessWidget {
+  const _ErrorMessageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final errorMassege = AuthProvider.of(context)?.model.errorMassege;
+    if (errorMassege == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        errorMassege,
+        style: const TextStyle(fontSize: 17, color: Colors.red),
       ),
     );
   }

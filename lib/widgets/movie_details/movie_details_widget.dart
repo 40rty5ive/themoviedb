@@ -19,12 +19,12 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Людина-павук: Додому шляху нема '),
+          title: const Text('Людина-павук: Додому шляху нема '),
         ),
         body: ColoredBox(
-          color: Color.fromRGBO(24, 23, 27, 1.0),
+          color: const Color.fromRGBO(24, 23, 27, 1.0),
           child: ListView(
-            children: [
+            children: const [
               MovieDetailsMainInfoWidget(),
               SizedBox(height: 30),
               MovieDetailsMainScreenCastWidget(),

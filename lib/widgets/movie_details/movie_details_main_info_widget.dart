@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets/elements/element_percent_widget.dart';
 
@@ -12,20 +10,20 @@ class MovieDetailsMainInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         _TopPosterWidget(),
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.0),
           child: _MovieNameWidget(),
         ),
         _SocreWidget(),
         _SummerWidget(),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(10.0),
           child: _OverviewWidget(),
         ),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(10.0),
           child: _DescriptionWidget(),
         ),
         SizedBox(
@@ -44,7 +42,7 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return const Text(
         'Уперше за всю кіноісторію Людини-павука улюбленого супергероя викрито. Пітер Паркер більше не в змозі поєднувати звичайне життя та супергеройські обов’язки. Щоб повернути все назад, він звертається за допомогою до Доктора Стренджа.',
         style: TextStyle(
           color: Colors.white,
@@ -61,7 +59,7 @@ class _OverviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Опис',
+    return const Text('Опис',
         style: TextStyle(
           color: Colors.white,
           fontSize: 16,
@@ -76,7 +74,7 @@ class _TopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
+      children: const [
         Image(image: AssetImage(AppImages.topHeader)),
         Positioned(
           top: 20,
@@ -97,7 +95,7 @@ class _MovieNameWidget extends StatelessWidget {
     return RichText(
         maxLines: 3,
         textAlign: TextAlign.center,
-        text: TextSpan(children: [
+        text: const TextSpan(children: [
           TextSpan(
             text: 'Людина-павук: Додому шляху нема ',
             style: TextStyle(
@@ -125,7 +123,7 @@ class _SocreWidget extends StatelessWidget {
       TextButton(
           onPressed: () {},
           child: Row(
-            children: [
+            children: const [
               SizedBox(
                 width: 50,
                 height: 50,
@@ -147,7 +145,7 @@ class _SocreWidget extends StatelessWidget {
       Container(width: 1, height: 15, color: Colors.grey),
       TextButton(
           onPressed: () {},
-          child: Row(children: [
+          child: Row(children: const [
             Icon(Icons.play_arrow),
             Text(
               'Play Trailer',
@@ -162,10 +160,10 @@ class _SummerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
+    return const ColoredBox(
       color: Color.fromRGBO(22, 21, 25, 1.0),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           vertical: 10,
           horizontal: 70,
         ),
@@ -189,12 +187,12 @@ class _PeopleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameStyle = TextStyle(
+    const nameStyle = TextStyle(
       color: Colors.white,
       fontSize: 16,
       fontWeight: FontWeight.w400,
     );
-    final jobTitleStyle = TextStyle(
+    const jobTitleStyle = TextStyle(
       color: Colors.white,
       fontSize: 16,
       fontWeight: FontWeight.w400,
@@ -207,21 +205,21 @@ class _PeopleWidget extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text('Stan Lee', style: nameStyle),
                 Text('Characters', style: jobTitleStyle),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text('Stan Lee', style: nameStyle),
                 Text('Characters', style: jobTitleStyle),
               ],
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Row(
@@ -230,14 +228,14 @@ class _PeopleWidget extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text('Stan Lee', style: nameStyle),
                 Text('Characters', style: jobTitleStyle),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text('Stan Lee', style: nameStyle),
                 Text('Characters', style: jobTitleStyle),
               ],

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 import '../movie_list/movie_list_widget.dart';
@@ -25,11 +23,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('TMDB')),
+        title: const Center(child: Text('TMDB')),
       ),
       body: IndexedStack(
         index: _selectedTab,
-        children: [
+        children: const [
           Text('Новини'),
           MovieListWidget(),
           Text('Серіали'),
@@ -37,7 +35,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Новини',
