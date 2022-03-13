@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:themoviedb/widgets/elements/element_percent_widget.dart';
 
-import '../../resources/resources.dart';
+import '../../../resources/resources.dart';
+import '../elements/element_percent_widget.dart';
+
+
 
 class MovieDetailsMainInfoWidget extends StatelessWidget {
   const MovieDetailsMainInfoWidget({Key? key}) : super(key: key);

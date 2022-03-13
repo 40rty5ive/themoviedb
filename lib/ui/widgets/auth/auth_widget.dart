@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:themoviedb/Theme/app_button_style.dart';
-import 'package:themoviedb/widgets/auth/auth_model.dart';
 
-class AuthWdget extends StatefulWidget {
-  const AuthWdget({Key? key}) : super(key: key);
+
+import '../../Theme/app_button_style.dart';
+import 'auth_model.dart';
+
+
+class AuthWidget extends StatefulWidget {
+  const AuthWidget({Key? key}) : super(key: key);
 
   @override
-  _AuthWdgetState createState() => _AuthWdgetState();
+  _AuthWidgetState createState() => _AuthWidgetState();
 }
 
-class _AuthWdgetState extends State<AuthWdget> {
+class _AuthWidgetState extends State<AuthWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +86,7 @@ class _FormWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const _ErrorMessageWidget(),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           const Text(
